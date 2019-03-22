@@ -45,6 +45,59 @@ app.listen(port, () => {
 
 // handle other urls
 // 處理其它網址
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
 
-app.use(express.static(`${__dirname}/unit/index.html`))
+app.use(express.static(`${__dirname}/dist`))
+
+/* Step 4:
+ * open `[host]:[port]/step4` in a browser multiple times to see the result
+ * try re-execute the program and see the result
+ * learn the syntax of string interpolation in js, see `${++nRequests}` in the code
+ * 用瀏覽器打開 `[host]:[port]/step4` 多次看結果
+ * 試著重新執行程式並觀察結果
+ * 學習 js 的 string interpolation 語法，參考程式中的 `${++nRequests}`
+ */
+let nRequests = 0
+app.get('/step4', (req, res) => {
+  res.send(`this is request #${++nRequests}`)
+})
+
+/* Step 5:
+ * user input is stored in the first argument of the callback function, aka `req` in the code
+ * open `[host]:[port]/step5?fname=[fname]&lname=[lname]` in a browser to see the result
+ * try edit [fname] and [lname]
+ * notice the syntax of `?` and `&` in the url
+ * 使用者輸入存放在回呼函式的第一個參數，也就是程式中的 `req` 裡
+ * 用瀏覽器打開 `[host]:[port]/step5?fname=[fname]&lname=[lname]` 看結果
+ * 試著修改 [fname] 與 [lanme]
+ * 注意網址中 `?` 與 `&` 的用法
+ */
+app.get('/step5', (req, res) => {
+    res.send(`<h1>Hello, ${req.query.lname}  ${req.query.fname}</h1>`)
+  })
+
+/* Step 7:
+ * edit [property name]s to appropriate values
+ * google `express body-parser` for more
+ * notice `app.post()` is used instead of `app.get()`
+ * server can return different results for get and post requests of the same url
+ * 將 [property name] 修改成合適的值
+ * 搜尋 `express body-parser` 了解更多
+ * 注意這裡用的是 `app.post()` 而非 `app.get()`
+ * 伺服器可以依 get 或是 post，針對同樣網址回傳不同結果
+ */
+
+// include `body-parser`
+// 載入 `body-parser`
+const bodyParser = require('body-parser')
+
+// setup `body-parser`
+// 設定 `body-parser`
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.post('/step7', (req, res) => {
+  // `bady-parser` stores parsed data in `req.body`
+  // `bady-parser` 將解析好的資料存放在 `req.body`
+  res.send(`<h1>Hello, ${req.body.fname} ${req.body.lname}</h1>`)
+})

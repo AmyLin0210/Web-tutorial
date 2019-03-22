@@ -1,6 +1,6 @@
 # js exercise
 
-Follow the guide bellow to finish a web shown in `./detail-2.gif`.
+Follow the guide below to finish a web shown in `./detail-2.gif`.
 
 本練習實作淡入淡出(fade in/out)的動態效果，透明度在 css 中可以用 `opacity` 來設定，本練習提供了四種作法來實作動態效果，請參著下方的 Steps 3-6。
 
@@ -49,7 +49,7 @@ Insert the following code into `./exercise.html` and follow instructions beginni
  * google `js arrow function` for the `( ... ) => { ... }` syntax
  * use browser developer console to test the event
  */
-$(document).[event](() => { // Step 2: replace [event] with an approprite value
+$(document).[event](() => { // Step 2: replace [event] with an appropriate value
   console.log("Event triggered!")
 })
 ```
@@ -103,7 +103,7 @@ $('.card:nth-child(2)').click(function(){
 })
 ```
 
-## Step 5: experimence the power of framework
+## Step 5: experience the power of framework
 
 Insert the following code into `./exercise.js` and follow instructions beginning with `Step 5`.
 

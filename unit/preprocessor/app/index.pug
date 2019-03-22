@@ -1,20 +1,24 @@
 doctype html
 html
   head
-    title webpack demo
-    link(rel="stylesheet" type="text/css" href="./app.css")
-    style(type='text/css')
-      |.firstPug  {
-      |  color: grey;
-      |  text-align: center;
-      |}
+    title preprocessor exercise
+    link(href="./app.css",rel="stylesheet",type="text/css")
+    style(type='text/css'). // Step 1: watch out the trailing dot
+      .firstPug  {
+        color: grey;
+        text-align: center;
+      }
   body
     h1.firstPug This is my first pug!
+<<<<<<< HEAD
     // Step 1
     // Add a 'Hello world!' with h2 tag
     // hint: Transfer html: '<h2>Hello world!</h2>' to pug.
     h2.secondPug HelloWorld
+=======
+    // Step 1 code goes here
+>>>>>>> 75df03931e7745d88cb39f361ba0a4e1b8c3a369
     #container
+      // Step 1: pug provides loop
       - for (let i = 0; i < 3; i++)
         button Click me
-    script(src="./app.js")

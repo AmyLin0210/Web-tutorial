@@ -1,93 +1,98 @@
-# preprocessor
+# preprocessor exercise
 
 ## Step 0: set up
 
-### from scratch
+You can create a project from scratch.  That is, install dependent packages via their names.
 
 ```
 $ npm init -y
-$ npm i parcel-bundler --save-dev
+$ npm i node-sass --save-dev # for step 2
 $ npm i jquery --save
-$ npm i pug-cli --save --save-dev
-$ npm i node-sass --save --save-dev
+$ npm i parcel-bundler --save-dev # for step 3
+$ npm i pug-cli --save-dev # for step 1
 # edit package.json if you want
 ```
 
-### or, use our package.json
+Or, simply use our `package.json`, which specifies dependent packages for you. Notice that only one of the following two commands is required.
 
 ```
-`$ npm i` or `$ yarn` if you have it
+$ npm i
+$ yarn # if you have it
 ```
 
+## Step 1: use pug, a better html
 
-## Step 1: build your first pug
-* What`s Pug?
-https://pugjs.org/language/tags.html
-    * Need no start tag/end tag.
-    * Use indent to represent scope level.
-    * Able to add class and name with css selector.e.g. `#container`
-    * Add attribute in bracket.e.g. `a(href="sample.com")`
+* What's [Pug](https://pugjs.org/language/tags.html)?
+  * Need no start tag/end tag.
+  * Use indent to represent scope level.
+  * Use css selector to create html tag. For example, `#container` in pug equals `<div id="container"></div>` in html.
 
-* Complie your first pug
+* Compile a pug file.
 
-Type `cat ./app/index.pug` to see the default pug file.
-Then run the following code.
+  ```
+  $ ./node_modules/.bin/pug ./app/index.pug -o ./dist/
+  ```
+
+  Compare `./app/index.pug` and `./dist/index.html`.
+
+* Insert a `<h2>Hello world!</h2>` equivalent into `./app/index.pug` and follow instructions beginning with `Step 1`. In `vi`, try pressing `/` key to search text. Remember to re-compile once you edit `./app/index.pug`.
+
+* Feel tired to compile manually? Use `--watch`.
+
+  ```
+  $ ./node_modules/.bin/pug ./app/index.pug -o ./dist/ --watch
+  ```
+
+  The `./dist/index.html` will be automatically re-compiled whenever you save `./app/index.pug`.
+
+## Step 2: use sass, a better css
+
+* What's [SASS](https://sass-lang.com/guide)? As pug, sass use indent to represent scope level and has many useful features. Try variables, nesting, and mixins.
+
+* Compile `./app/app.sass` to `./dist/app.css`.
+
+  ```
+  $ ./node_modules/.bin/node-sass ./app/app.sass -o dist --watch
+  ```
+
+* Reference the following code to make the three buttons different with `buttonStyle` mixin.
+
+  ```
+  /* Step 2:
+   * copy the following code to `./app/app.sass`
+   * you may need to copy more than once
+   * replace [child index], [color] and [border radius] with appropriate values
+   */
+  &:nth-child([child index])
+    +buttonStyle([color], [border radius])
+  ```
+
+  Compare `./app/app.sass` and `./dist/app.css`.
+
+## Step 3: is there a better js?
+
+There was, see [Babel](https://babeljs.io/). However, modern js engines catch up the development of js. Try to open `./babel/es6.js` in old [Node.js](https://nodejs.org/en/) (version < 7) or browsers. Now Babel is usually used for js variants such as [TypeScript](https://www.typescriptlang.org/). Execute the following command and than compare `./babel/typescript.ts` and `./dist/typescript.js`.
+
 ```
-$ ./node_modules/.bin/pug app/index.pug -o dist/
+$ ./node_modules/.bin/babel ./babel/typescript.ts --out-dir ./dist/ --extensions ".ts"
 ```
-
-* Add a 'Hello world!' with h2 tag into `./app/index.pug`.
-
-  hint: Transfer html: `<h2>Hello world!</h2>` to pug.
-
-* Add parameter to  watch files for changes
-
-  Your files will automatically re-render. No more inconvenient commands.
-  You can find the `index.html` in dist directory.
-```
-$ ./node_modules/.bin/node-sass app/index.pug -o dist/ --watch
-```
-
-* Experience the power of `--watch`.
-
-  Add firstPug-class to your 'Hello world!' with automatically re-render.
-```
-`h2[firstPug-class] Hello world!`
-```
-
-
-## Step 2: build your first sass
-
-* What`s sass?
-https://sass-lang.com/guide
-
-  As pug, sass use indent to represent scope level.
-Moreover, Variables, Nesting, and Mixins are powerful feature of sass.
-
-* Complie your first sass
-  You can find the `app.css` in dist directory.
-```
-$ ./node_modules/.bin/node-sass app/app.sass -o dist/ --watch
-```
-
-* Determinie your button color and border-radius
-```
-  &:nth-child([which chld])
-    +buttonStyle([color], [border])
-```
-hint: There three children in container and be aware of indent.
-
-
-## Why preprocessor?
-
-The  solution of web development skyrocketing.
-
-Try to compile `/new` with old version node.js or old browser.
 
 ## Step 4: automation (with parcel)
 
-Using parcel, you can complie pug and sass together.
-Edit [port] in `package.json`, and use parcel build your web.
+* Using parcel, you can watch pug, sass and js together.
 
-1. `npm start` or `yarn start`
-2. open http://[HOST]:[PORT]
+  ```
+  $ ./node_modules/.bin/parcel watch ./parcel/index.pug
+  ```
+
+  Note that `./app/index.pug` links `app.css` but `./parcel/index.pug` links `app.sass`.
+
+* See `parcel/app.js` to learn how to use jquery with parcel.
+
+* Automation tools like parcel do more than just preprocessing.
+
+  ```
+  $ ./node_modules/.bin/parcel ./parcel/index.pug --port [port]
+  ```
+
+  Open `http://[host]:[port]` in your browser. Remember to replace [host] and [port] to appropriate values.
