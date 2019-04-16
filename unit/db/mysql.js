@@ -12,9 +12,21 @@ connection.connect(err => {
   }
 })
 
-connection.query('CREATE TABLE IF NOT EXISTS big_table (id INT, score INT)')
+// Step 2
+// create table if necessary
 
-for (let i = 1; i < 100000; i++)
-  connection.query(`INSERT INTO big_table (id, score) VALUES (${i}, ${Math.floor(Math.random() * 100)})`)
+
+// show table
+
+
+// Step 3
+// insert data
+
+
+// search data
+
+
+// Step 4
+// combine tables
 
 connection.end()
